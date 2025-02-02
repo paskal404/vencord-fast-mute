@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { removeClickListener } from "@api/MessageEvents";
 import definePlugin from "@utils/types";
 import { RestAPI } from "@webpack/common";
 
@@ -47,7 +46,7 @@ export default definePlugin({
         if (mute !== null) {
             if (mute === cb.props.serverMute) return;
 
-            console.log(`Sending request to ${mute ? "mute" : "unmute"} ${cb.props.user.username}`);
+            // console.log(`Sending request to ${mute ? "mute" : "unmute"} ${cb.props.user.username}`);
             RestAPI.patch({
                 url: `/guilds/${cb.props.channel.guild_id}/members/${cb.props.user.id}`,
                 body: { mute }
@@ -61,7 +60,6 @@ export default definePlugin({
     },
 
     stop() {
-        removeClickListener(this.onClick);
         document.removeEventListener("keydown", handleKeyDown);
         document.removeEventListener("keyup", handleKeyUp);
     }
